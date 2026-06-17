@@ -1,3 +1,1 @@
-{"id":"1"}
-{"id":"2"}
-{"id":"3"}
+{"id": "1", "date": "2026-06-17", "type": "expense", "category": "food", "amount": 12000, "memo": "", "tags": []}

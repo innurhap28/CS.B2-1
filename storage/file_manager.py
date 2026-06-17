@@ -1,7 +1,6 @@
 from pathlib import Path
 import json
-# from typing import Generator
-# 근데 GPT가 이거 나한테 너무 어려우니까 Iterator라는 걸 쓰래; 이게 먼데 일단 생략!
+from typing import Iterator
 
 class FileManager:
     def __init__(self, data_dir: str = "data"):
@@ -40,8 +39,7 @@ class FileManager:
             file.write("\n")
 
     # 제너레이터 기반 스트리밍 처리
-    # def stream_jsonl(self) -> Generator[dict, None, None]:
-    def stream_jsonl(self):
+    def stream_jsonl(self) -> Iterator[dict]:
         with self.transactions_file.open(
             mode="r",
             encoding="utf-8"
