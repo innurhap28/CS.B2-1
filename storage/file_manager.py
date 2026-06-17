@@ -1,4 +1,7 @@
 from pathlib import Path
+import json
+# from typing import Generator
+# 근데 GPT가 이거 나한테 너무 어려우니까 Iterator라는 걸 쓰래; 이게 먼데 일단 생략!
 
 class FileManager:
     def __init__(self, data_dir: str = "data"):
@@ -8,6 +11,7 @@ class FileManager:
         self.categories_file = self.data_dir / "categories.json"
         self.budgets_file = self.data_dir / "budgets.json"
 
+    # data 파일이 없을 경우 생성
     def ensure_files(self) -> None:
         self.data_dir.mkdir(exist_ok=True)
 
@@ -24,3 +28,24 @@ class FileManager:
                 "{}",
                 encoding="utf-8"
             )
+
+    # 새로운 거래 데이터를 추가
+    def append_jsonl(self, data: dict) -> None:
+        with self.transactions_file.open(
+            mode="a",
+            encoding="utf-8"
+        ) as file:
+            
+            json.dump(data, file, ensure_ascii=False)
+            file.write("\n")
+
+    # 제너레이터 기반 스트리밍 처리
+    # def stream_jsonl(self) -> Generator[dict, None, None]:
+    def stream_jsonl(self):
+        with self.transactions_file.open(
+            mode="r",
+            encoding="utf-8"
+        ) as file:
+            
+            for line in file:
+                yield json.loads(line)
