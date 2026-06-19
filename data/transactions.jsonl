@@ -1,1 +1,3 @@
 {"id": "1", "date": "2026-06-17", "type": "expense", "category": "food", "amount": 99999, "memo": "", "tags": []}
+{"id": "5", "date": "2026-06-19", "type": "출금", "category": "식비", "amount": 34000, "memo": "", "tags": []}
+{"id": "eab6f6c7-27e9-4275-9b96-727add8de330", "date": "2026-06-19", "type": "expense", "category": "etc", "amount": 2500, "memo": "", "tags": []}
