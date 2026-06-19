@@ -47,3 +47,9 @@ class FileManager:
             
             for line in file:
                 yield json.loads(line)
+
+    def rewrite_jsonl(self, transactions: list[dict]) -> None:
+        with self.transactions_file.open(mode="w", encoding="utf-8") as file:
+            for transaction in transactions:
+                json.dump (transaction, file, ensure_ascii=False)
+                file.write("\n")
