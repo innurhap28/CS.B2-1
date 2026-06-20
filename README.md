@@ -75,6 +75,9 @@ def stream_jsonl(self):
 
 ---
 ## 3. storage/repository.py
+
+FileManager는 파일 읽기, 쓰기, 생성만 담당, 
+Repository는 거래 저장, 조회, 삭제, 수정을 담당 -> 차이 구별
 ```
 class Repository:
 
@@ -212,8 +215,8 @@ update \
 
 - [x] 대화형 거래 추가 입력 기능
 - [x] 거래 목록 출력 기능
-- [] 거래 검색 기능
-- [] 거래 월별 요약 기능
+- [x] 거래 검색 기능
+- [x] 거래 월별 요약 기능
 - [] 예산 설정/조회 기능
 - [] 카테고리 관리 기능
 - [] 거래 수정 기능

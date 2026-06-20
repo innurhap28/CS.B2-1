@@ -7,6 +7,9 @@ class TransactionService:
     def __init__(self):
         self.repository = Repository()
 
+    def add_transaction(self, transaction: Transaction) -> None:
+        self.repository.add_transaction(transaction)
+
     def list_transactions(self, limit=None) -> Iterator[Transaction]:
         count = 0
         for tx in self.repository.iter_transactions():
@@ -14,9 +17,6 @@ class TransactionService:
             count += 1
             if limit and count >= limit:
                 break
-
-    def add_transaction(self, transaction: Transaction) -> None:
-        self.repository.add_transaction(transaction)
 
     def search_transactions(self, from_date=None, to_date=None, category=None, transaction_type=None):
         for tx in self.repository.iter_transactions():
@@ -41,3 +41,9 @@ class TransactionService:
             elif tx.type == "expense":
                 expense += tx.amount
         return {"income": income, "expense": expense, "balance": income - expense}
+    
+    def delete_transactions(self, transaction_id: str) -> bool:
+        return self.repository.delete_transaction(transaction_id)
+
+    def update_transactions(self, transaction_id, date=None, transaction_type=None, category=None, amount=None):
+        return self.repository.update_transaction(transaction_id, date, transaction_type, category, amount)

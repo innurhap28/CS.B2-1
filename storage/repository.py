@@ -1,5 +1,3 @@
-# FileManager는 파일 읽기, 쓰기, 생성만 담당, 
-# Repository는 거래 저장, 조회, 삭제, 수정을 담당 -> 차이 구별
 from models.transaction import Transaction
 from storage.file_manager import FileManager
 from typing import Iterator
@@ -34,14 +32,26 @@ class Repository:
             self.file_manager.rewrite_jsonl(remaining_transactions)
         return deleted
     
-    def update_amount(self,transaction_id: str, amount: int) -> bool:
+    def update_transaction(self, transaction_id: str, 
+                           date: str | None = None,
+                           transaction_type: str | None = None,
+                           category: str | None = None,
+                           amount: int | None = None) -> bool:
         updated = False
         transactions = []
         for transaction in self.iter_transactions():
             if transaction.id == transaction_id:
-                transaction.amount = amount
+                if date is not None:
+                    transaction.date = date
+                if transaction_type is not None:
+                    transaction.type = transaction_type
+                if category is not None:
+                    transaction.category = category
+                if amount is not None:
+                    transaction.amount = amount
                 updated = True
             transactions.append(transaction.to_dict())
         if updated:
             self.file_manager.rewrite_jsonl(transactions)
         return updated
+    

@@ -49,15 +49,46 @@ def handle_summary(args):
     result = service.get_monthly_summary(args.month)
     print(f"총 수입 : {result['income']}\n총 지출 : {result['expense']}\n잔액 : {result['balance']}")
 
+def handle_delete(args):
+    print("- 등록된 거래 삭제 ------")
+    if not args.id:
+        print("삭제할 거래 ID를 입력하세요.")
+        return
+    deleted = service.delete_transactions(args.id)
+    if deleted:
+        print("삭제가 완료되었습니다.")
+    else:
+        print("해당 ID의 거래가 존재하지 않습니다.")
+
+def handle_update(args):
+    print("- 등록된 거래 수정 ------")
+    if not args.id:
+        print("수정할 거래 ID를 입력하세요.")
+        return
+    updated = service.update_transactions(
+        transaction_id=args.id,
+        date=args.date,
+        transaction_type=args.type,
+        category=args.category,
+        amount=args.amount
+    )
+    if updated:
+        print("수정 완료!")
+    else:
+        print("해당 ID의 거래가 존재하지 않습니다.")
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=["add", "list", "search", "summary", "delete"])
+    parser.add_argument("command", choices=["add", "list", "search", "summary", "delete", "update"])
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--from-date")
     parser.add_argument("--to-date")
     parser.add_argument("--category")
     parser.add_argument("--type")
     parser.add_argument("--month", default=None)
+    parser.add_argument("--id")
+    parser.add_argument("--amount", type=int)
+    parser.add_argument("--date")
     args = parser.parse_args()
     if args.command == "add":
         handle_add()
@@ -67,6 +98,10 @@ def main():
         handle_search(args)
     elif args.command == "summary":
         handle_summary(args)
+    elif args.command == "delete":
+        handle_delete(args)
+    elif args.command == "update":
+        handle_update(args)
 
 if __name__ == "__main__":
     main()
