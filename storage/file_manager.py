@@ -38,3 +38,11 @@ class FileManager:
             for transaction in transactions:
                 json.dump (transaction, file, ensure_ascii=False)
                 file.write("\n")
+
+    def read_categories(self) -> list[str]:
+        with self.categories_file.open(mode="r", encoding="utf-8") as file:
+            return json.load(file)
+    
+    def write_categories(self, categories: list[str]) -> None:
+        with self.categories_file.open(mode="w", encoding="utf-8") as file:
+            json.dump(categories, file, ensure_ascii=False, indent=4)

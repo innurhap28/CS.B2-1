@@ -77,9 +77,32 @@ def handle_update(args):
     else:
         print("해당 ID의 거래가 존재하지 않습니다.")
 
+def handle_category(args):
+    if args.action == "list":
+        categories = service.get_categories()
+        print("- 카테고리 목록 ----------")
+        for category in categories:
+            print(category)
+    elif args.action == "add":
+        if not args.value:
+            print("추가할 카테고리를 입력하세요.")
+            return
+        if service.add_category(args.value):
+            print("카테고리 추가 완료!")
+        else:
+            print("이미 존재하는 카테고리입니다.")
+    elif args.action == "remove":
+        if not args.value:
+            print("삭제할 카테고리를 입력하세요.")
+            return
+        if service.remove_category(args.value):
+            print("카테고리 삭제 완료!")
+        else:
+            print("삭제할 수 없습니다.")
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=["add", "list", "search", "summary", "delete", "update"])
+    parser.add_argument("command", choices=["add", "list", "search", "summary", "delete", "update", "category"])
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--from-date")
     parser.add_argument("--to-date")
@@ -89,6 +112,8 @@ def main():
     parser.add_argument("--id")
     parser.add_argument("--amount", type=int)
     parser.add_argument("--date")
+    parser.add_argument("action", nargs="?")
+    parser.add_argument("value", nargs="?")
     args = parser.parse_args()
     if args.command == "add":
         handle_add()
@@ -102,6 +127,8 @@ def main():
         handle_delete(args)
     elif args.command == "update":
         handle_update(args)
+    elif args.command == "category":
+        handle_category(args)
 
 if __name__ == "__main__":
     main()

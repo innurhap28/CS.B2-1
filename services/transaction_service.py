@@ -47,3 +47,15 @@ class TransactionService:
 
     def update_transactions(self, transaction_id, date=None, transaction_type=None, category=None, amount=None):
         return self.repository.update_transaction(transaction_id, date, transaction_type, category, amount)
+
+    def get_categories(self):
+        return self.repository.get_categories()
+    
+    def add_category(self, category):
+        return self.repository.add_category(category)
+
+    def remove_category(self, category: str) -> bool:
+        for tx in self.repository.iter_transactions():
+            if tx.category == category:
+                return False
+        return self.repository.remove_categorey(category)

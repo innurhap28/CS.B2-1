@@ -55,3 +55,21 @@ class Repository:
             self.file_manager.rewrite_jsonl(transactions)
         return updated
     
+    def get_categories(self) -> list[str]:
+        return self.file_manager.read_categories()
+
+    def add_category(self, category: str) -> bool:
+        categories = self.file_manager.read_categories()
+        if category in categories:
+            return False
+        categories.append(category)
+        self.file_manager.write_categories(categories)
+        return True
+
+    def remove_categorey(self, category):
+        categories = self.file_manager.read_categories()
+        if category not in categories:
+            return False
+        categories.remove(category)
+        self.file_manager.write_categories(categories)
+        return True
