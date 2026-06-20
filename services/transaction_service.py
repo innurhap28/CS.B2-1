@@ -7,8 +7,37 @@ class TransactionService:
     def __init__(self):
         self.repository = Repository()
 
-    def list_transactions(self) -> Iterator[Transaction]:
-        yield from self.repository.iter_transactions()
+    def list_transactions(self, limit=None) -> Iterator[Transaction]:
+        count = 0
+        for tx in self.repository.iter_transactions():
+            yield tx
+            count += 1
+            if limit and count >= limit:
+                break
 
     def add_transaction(self, transaction: Transaction) -> None:
         self.repository.add_transaction(transaction)
+
+    def search_transactions(self, from_date=None, to_date=None, category=None, transaction_type=None):
+        for tx in self.repository.iter_transactions():
+            if from_date and tx.date < from_date:
+                continue
+            if to_date and tx.date > to_date:
+                continue
+            if category and tx.category != category:
+                continue
+            if transaction_type and tx.type != transaction_type:
+                continue
+            yield tx
+    
+    def get_monthly_summary(self, month=None):
+        income = 0
+        expense = 0
+        for tx in self.repository.iter_transactions():
+            if not tx.date.startswith(month):
+                continue
+            if tx.type == "income":
+                income += tx.amount
+            elif tx.type == "expense":
+                expense += tx.amount
+        return {"income": income, "expense": expense, "balance": income - expense}
