@@ -1,0 +1,31 @@
+{
+    "ko": {
+        "MENU_add": "- # 거래 추가 ---------------",
+        "MENU_list": "- # 거래 목록 ---------------",
+        "MENU_search": "- # 거래 검색 ---------------",
+        "MENU_summary": "- # 월별 요약 ---------------",
+        "MENU_delete": "- # 거래 삭제 ---------------",
+        "MENU_update": "- # 거래 수정 ---------------",
+        "MENU_category": "- # 카테고리 목록 --------------",
+
+        "no_result": "검색 결과가 없습니다.",
+        "complete_delete": "삭제가 완료되었습니다.",
+        "complete_update": "수정이 완료되었습니다.",
+        "complete_add": "추가가 완료되었습니다.",
+
+        "ID_to_update": "수정할 거래 ID를 입력하세요.",
+        "ID_to_delete": "삭제할 거래 ID를 입력하세요.",
+
+        "CATE_to_add": "추가할 카테고리를 입력하세요.",
+        "CATE_to_delete": "삭제할 카테고리를 입력하세요.",
+
+        "cannot_delete": "삭제할 수 없습니다.",
+        "existing_cate": "이미 존재하는 카테고리입니다.",
+
+        "ERR_not_found_id": "해당 ID의 거래가 존재하지 않습니다.",
+        "ERR_not_valid_date": "날짜 형식이 올바르지 않습니다.",
+        "ERR_not_valid_type": "거래 타입이 올바르지 않습니다. (income/expense)",
+        "ERR_not_valid_amount": "양의 정수를 입력하세요.",
+        "ERR_not_valid_cate": "존재하지 않는 카테고리입니다. 카테고리 등록 후 추가해주세요."
+    }
+}
