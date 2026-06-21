@@ -21,6 +21,8 @@
 
         "cannot_delete": "삭제할 수 없습니다.",
         "existing_cate": "이미 존재하는 카테고리입니다.",
+        "exceed_budget": "예산을 초과하였습니다.",
+        "no_data": "데이터가 존재하지 않습니다.",
 
         "ERR_not_found_id": "해당 ID의 거래가 존재하지 않습니다.",
         "ERR_not_valid_date": "날짜 형식이 올바르지 않습니다.",

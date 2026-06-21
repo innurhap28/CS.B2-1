@@ -33,6 +33,7 @@ class TransactionService:
     def get_monthly_summary(self, month=None):
         income = 0
         expense = 0
+        category_expense = {}
         for tx in self.repository.iter_transactions():
             if not tx.date.startswith(month):
                 continue
@@ -40,7 +41,11 @@ class TransactionService:
                 income += tx.amount
             elif tx.type == "expense":
                 expense += tx.amount
-        return {"income": income, "expense": expense, "balance": income - expense}
+                category_expense[tx.category] = (category_expense.get(tx.category, 0) + tx.amount)
+        top_categories = sorted(category_expense.items(), key=lambda x: x[1], reverse=True)
+        if income == 0 and expense == 0:
+            return None
+        return {"income": income, "expense": expense, "balance": income - expense, "top_categories": top_categories}
     
     def delete_transactions(self, transaction_id: str) -> bool:
         return self.repository.delete_transaction(transaction_id)
@@ -58,4 +63,4 @@ class TransactionService:
         for tx in self.repository.iter_transactions():
             if tx.category == category:
                 return False
-        return self.repository.remove_categorey(category)
+        return self.repository.remove_category(category)

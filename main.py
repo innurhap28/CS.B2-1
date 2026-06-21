@@ -3,8 +3,10 @@ import argparse, uuid, json, os
 from services.transaction_service import TransactionService
 from models.transaction import Transaction
 from utils.validators import (validate_amount, validate_date, validate_type)
+from services.budget_service import BudgetService
 
 service = TransactionService()
+budget_service = BudgetService()
 
 def load_messages(lang="ko"):
     base_path = os.path.dirname(os.path.abspath(__file__))
@@ -56,7 +58,21 @@ def handle_search(args):
 def handle_summary(args):
     print(msg["MENU_summary"])
     result = service.get_monthly_summary(args.month)
+    if result is None:
+        print(msg["no_data"])
+        return
     print(f"총 수입 : {result['income']}\n총 지출 : {result['expense']}\n잔액 : {result['balance']}")
+    print(f"\n카테고리별 지출 TOP {args.top}")
+    for category, amount in result["top_categories"][:args.top]:
+        print(f"{category}: {amount:,}원")
+    budget = budget_service.get_budget(args.month)
+    if budget is not None:
+        usage = result['expense'] / budget * 100
+        print(f"\n예산: {budget:,}원")
+        print(f"사용률: {usage:.1f}%")
+        if result['expense'] > budget:
+            print(msg["exceed_budget"])
+
 
 def handle_delete(args):
     print(msg["MENU_delete"])
@@ -109,6 +125,11 @@ def handle_category(args):
         else:
             print(msg["cannot_delete"])
 
+def handle_budget(args):
+    if args.budget_action == "set":
+        budget_service.set_budget(args.month, args.amount)
+        print(f"{args.month} 예산 {args.amount:,}원 저장 완료")
+
 def create_parser():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -121,7 +142,13 @@ def create_parser():
     search_parser.add_argument("--category")
     search_parser.add_argument("--type")
     summary_parser = subparsers.add_parser("summary")
-    summary_parser.add_argument("--month")
+    summary_parser.add_argument("--month", required=True)
+    summary_parser.add_argument("--top", type=int, default=5)
+    budget_parser = subparsers.add_parser("budget")
+    budget_subparsers = budget_parser.add_subparsers(dest="budget_action", required=True)
+    budget_set_parser = budget_subparsers.add_parser("set")
+    budget_set_parser.add_argument("--month", required=True)
+    budget_set_parser.add_argument("--amount", type=int, required=True)
     delete_parser = subparsers.add_parser("delete")
     delete_parser.add_argument("--id", required=True)
     update_parser = subparsers.add_parser("update")
@@ -144,7 +171,8 @@ def main():
         "summary": handle_summary,
         "delete": handle_delete,
         "update": handle_update,
-        "category": handle_category
+        "category": handle_category,
+        "budget": handle_budget
     }
     handlers[args.command](args)
 

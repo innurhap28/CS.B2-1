@@ -39,10 +39,10 @@ class FileManager:
                 json.dump (transaction, file, ensure_ascii=False)
                 file.write("\n")
 
-    def read_categories(self) -> list[str]:
-        with self.categories_file.open(mode="r", encoding="utf-8") as file:
+    def read_json(self, file_path: Path):
+        with file_path.open(mode="r", encoding="utf-8") as file:
             return json.load(file)
     
-    def write_categories(self, categories: list[str]) -> None:
-        with self.categories_file.open(mode="w", encoding="utf-8") as file:
-            json.dump(categories, file, ensure_ascii=False, indent=4)
+    def write_json(self, file_path: Path, data):
+        with file_path.open(mode="w", encoding="utf-8") as file:
+            json.dump(data, file, ensure_ascii=False, indent=4)
