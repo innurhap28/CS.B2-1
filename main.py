@@ -130,6 +130,17 @@ def handle_budget(args):
         budget_service.set_budget(args.month, args.amount)
         print(f"{args.month} 예산 {args.amount:,}원 저장 완료")
 
+def handle_export(args):
+    if not args.month and not (args.from_date and args.to_date):
+        print("--month 또는 --from-date/--to-date 조건이 필요합니다.")
+        exit(1)
+    count = service.export_csv(args.out, args.month, args.from_date, args.to_date)
+    print(f"{count}건을 {args.out}에 저장했습니다.")
+
+def handle_import(args):
+    count = service.import_csv(args.from_file)
+    print(f"{count}건을 가져왔습니다.")
+
 def create_parser():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -160,6 +171,13 @@ def create_parser():
     category_parser = subparsers.add_parser("category")
     category_parser.add_argument("action", choices=["add", "list", "remove"])
     category_parser.add_argument("value", nargs="?")
+    export_parser = subparsers.add_parser("export")
+    export_parser.add_argument("--out", required=True)
+    export_parser.add_argument("--month")
+    export_parser.add_argument("--from-date")
+    export_parser.add_argument("--to-date")
+    import_parser = subparsers.add_parser("import")
+    import_parser.add_argument("--from-file", required=True)
     return parser
 
 def main():
@@ -172,7 +190,9 @@ def main():
         "delete": handle_delete,
         "update": handle_update,
         "category": handle_category,
-        "budget": handle_budget
+        "budget": handle_budget,
+        "import": handle_import,
+        "export": handle_export
     }
     handlers[args.command](args)
 
