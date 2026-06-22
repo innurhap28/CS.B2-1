@@ -1,16 +1,31 @@
-# B2-1. 파일 기반 가계부 콘솔 프로그램
+# 파일 기반 가계부 콘솔 프로그램
 
-```
+## 1. 프로젝트 소개
+
+Python 기반의 파일 저장형(Console) 가계부 프로그램입니다.
+
+거래 내역을 추가, 조회, 수정, 삭제할 수 있으며, 검색, 월별 요약, 카테고리 관리, 예산 관리, CSV 가져오기/내보내기 기능을 제공합니다.
+
+데이터는 프로그램 종료 후에도 유지되도록 파일에 저장되며, 거래 내역 조회 및 검색 시 제너레이터(yield)를 이용한 스트리밍 방식을 사용합니다.
+
+또한 데코레이터를 활용하여 공통 기능(예외 처리, 실행 시간 측정)을 분리하였습니다.
+
+---
+
+## 2. 프로젝트 구조
+
+```text
 CS.B2-1/
 │
 ├── main.py                  # 프로그램 시작점, 메뉴 출력
+│
+├── messages.json            # 출력 메시지 상수 분리
 │
 ├── models/
 │   └── transaction.py       # Transaction 클래스
 │
 ├── services/
 │   ├── transaction_service.py   # 수입/지출 CRUD
-│   ├── category_service.py      # 카테고리 관리
 │   └── budget_service.py        # 예산 관리
 │
 ├── storage/
@@ -29,155 +44,244 @@ CS.B2-1/
 ```
 
 ---
-## 1. models/transaction.py
 
-```
-from dataclasses import dataclass, field
-from typing import List
+## 3. 저장 파일
 
-@dataclass
-class Transaction:
-    id: str
-    date: str
-    type: str
-    category: str
-    amount: int
-    memo: str = ""
-    tags: List[str] = field(default_factory=list)
-```
-```
-def to_dict(self) -> dict
-@classmethod
-def from_dict(cls, data: dict)
+### transactions.jsonl
+
+거래 내역 저장 파일
+
+예시
+
+```json
+{
+  "id": "a1b2c3d4",
+  "date": "2026-06-22",
+  "type": "expense",
+  "category": "food",
+  "amount": 12000,
+  "memo": "점심 식사",
+  "tags": ["meal", "lunch"]
+}
 ```
 
 ---
-## 2. storage/file_manager.py
+
+### categories.json
+
+카테고리 목록 저장
+
+예시
+
+```json
+[
+  "food",
+  "transport",
+  "shopping",
+  "salary"
+]
 ```
-class FileManager:
 
-    def ensure_files(self)
+---
 
-    def read_json(self)
+### budgets.json
 
-    def write_json(self)
+월별 예산 저장
 
-    def append_jsonl(self)
+예시
 
-    def stream_jsonl(self)
+```json
+{
+  "2026-06": 500000,
+  "2026-07": 600000
+}
 ```
+
+---
+
+## 4. 실행 방법
+
+### 거래 추가
+
+```bash
+python main.py add
 ```
+
+---
+
+### 거래 목록 조회
+
+```bash
+python main.py list
+
+python main.py list --limit 20
+```
+
+---
+
+### 거래 검색
+
+```bash
+python main.py search --category food
+
+python main.py search --type expense
+
+python main.py search --from-date 2026-06-01 --to-date 2026-06-30
+
+python main.py search --tag lunch
+```
+
+---
+
+### 월별 요약
+
+```bash
+python main.py summary --month 2026-06
+```
+
+---
+
+### 예산 설정
+
+```bash
+python main.py budget set --month 2026-06 --amount 500000
+```
+
+---
+
+### 예산 조회
+
+```bash
+python main.py budget get --month 2026-06
+```
+
+---
+
+### 카테고리 추가
+
+```bash
+python main.py category add food
+```
+
+---
+
+### 카테고리 목록 조회
+
+```bash
+python main.py category list
+```
+
+---
+
+### 카테고리 삭제
+
+```bash
+python main.py category remove food
+```
+
+---
+
+### 거래 수정
+
+```bash
+python main.py update \
+  --id abc123 \
+  --amount 30000 \
+  --category food
+```
+
+---
+
+### 거래 삭제
+
+```bash
+python main.py delete --id abc123
+```
+
+---
+
+### CSV 내보내기
+
+```bash
+python main.py export \
+  --out output.csv \
+  --month 2026-06
+```
+
+---
+
+### CSV 가져오기
+
+```bash
+python main.py import \
+  --from transactions.csv
+```
+
+---
+
+## 5. CSV 스키마
+
+가져오기(import)와 내보내기(export)는 아래 형식을 사용합니다.
+
+| column   | required | 설명               |
+| -------- | -------- | ---------------- |
+| date     | Y        | YYYY-MM-DD       |
+| type     | Y        | income / expense |
+| category | Y        | 등록된 카테고리         |
+| amount   | Y        | 양수 정수            |
+| memo     | N        | 메모               |
+| tags     | N        | 쉼표(,) 구분 문자열     |
+
+예시
+
+```csv
+date,type,category,amount,memo,tags
+2026-06-22,expense,food,12000,점심,lunch,meal
+2026-06-25,income,salary,3000000,월급,payday
+```
+
+---
+
+## 6. 주요 기능
+
+* 거래 추가(Add)
+* 거래 목록 조회(List)
+* 거래 검색(Search)
+* 거래 수정(Update)
+* 거래 삭제(Delete)
+* 월별 요약(Summary)
+* 예산 설정 및 조회(Budget)
+* 카테고리 관리(Category)
+* CSV 가져오기(Import)
+* CSV 내보내기(Export)
+
+---
+
+## 7. 구현 특징
+
+### 제너레이터 기반 스트리밍
+
+거래 내역 조회 및 검색 시 JSONL 파일 전체를 메모리에 올리지 않고 한 줄씩 읽어 처리합니다.
+
+```python
 def stream_jsonl(self):
-    with open(...) as f:
-        for line in f:
+    with open(self.transactions_file, encoding="utf-8") as file:
+        for line in file:
             yield json.loads(line)
 ```
 
 ---
-## 3. storage/repository.py
 
-FileManager는 파일 읽기, 쓰기, 생성만 담당, 
-Repository는 거래 저장, 조회, 삭제, 수정을 담당 -> 차이 구별
-```
-class Repository:
+### 데코레이터 활용
 
-    def add_transaction()
+공통 기능을 데코레이터로 분리하였습니다.
 
-    def get_transaction()
+* 예외 처리
+* 실행 시간 측정
 
-    def iter_transactions()
-
-    def update_transaction()
-
-    def delete_transaction()
-
-    def load_categories()
-
-    def save_categories()
-
-    def load_budgets()
-
-    def save_budgets()
-```
-
----
-## 4. services/transaction_service.py
-```
-class TransactionService:
-
-    def add()
-
-    def list()
-
-    def search()
-
-    def update()
-
-    def delete()
-
-    def export_csv()
-
-    def import_csv()
-```
-
----
-## 5. services/category_service.py
-```
-class CategoryService:
-
-    def add_category()
-
-    def list_categories()
-
-    def remove_category()
-
-    def exists()
-```
-
----
-## 6. services/budget_service.py
-```
-class BudgetService:
-
-    def set_budget()
-
-    def get_budget()
-
-    def calculate_usage()
-```
-
----
-## 7. utils/validators.py
-```
-def validate_date()
-
-def validate_amount()
-
-def validate_type()
-
-def validate_category()
-```
-
----
-## 8. utils/decorators.py
-```
-import time
-from functools import wraps
-```
-실행시간 측정
-```
-def measure_time(func):
-```
-예외 처리
-```
-def handle_error(func):
-```
-실행 로그
-```
-def log_action(func):
-```
 예시
-```
+
+```python
 @handle_error
 @measure_time
 def search():
@@ -185,40 +289,25 @@ def search():
 ```
 
 ---
-## 9. main.py
-argparse 사용
-```
-add
-list
-search
-summary
-budget
-category
-update
-delete
-import
-export
-```
-10개 명령을 연결
 
----
-### update는 옵션 방식
-```
-update \
-  --id abc123 \
-  --amount 30000 \
-  --category food
+### 타입 힌트 적용
+
+함수의 입력값과 반환값을 명확하게 표현하여 가독성과 유지보수성을 향상시켰습니다.
+
+```python
+def get_transaction(self, transaction_id: str) -> Transaction | None:
+    ...
 ```
 
 ---
-## 구현 체크리스트
 
-- [x] 대화형 거래 추가 입력 기능
-- [x] 거래 목록 출력 기능
-- [x] 거래 검색 기능
-- [x] 거래 월별 요약 기능
-- [x] 예산 설정/조회 기능
-- [x] 카테고리 관리 기능
-- [x] 거래 수정 기능
-- [x] 거래 삭제 기능
-- [] 데이터 가져오기/내보내기
+## 8. 개발 환경
+
+* Python 3.11+
+* argparse
+* json
+* csv
+* pathlib
+* dataclasses
+* typing
+* uuid
