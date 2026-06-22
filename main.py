@@ -5,9 +5,6 @@ from models.transaction import Transaction
 from utils.validators import (validate_amount, validate_date, validate_type)
 from services.budget_service import BudgetService
 
-service = TransactionService()
-budget_service = BudgetService()
-
 def load_messages(lang="ko"):
     base_path = os.path.dirname(os.path.abspath(__file__))
     json_path = os.path.join(base_path, "messages.json")
@@ -16,6 +13,8 @@ def load_messages(lang="ko"):
     return data.get(lang, data["ko"])
 
 msg = load_messages(lang="ko")
+service = TransactionService()
+budget_service = BudgetService()
 
 def get_valid_input(prompt, validator, error_message): 
     while True:
@@ -28,9 +27,20 @@ def handle_add(args):
     print(msg["MENU_add"])
     date = get_valid_input("날짜 : ", validate_date, msg["ERR_not_valid_date"])
     transaction_type = get_valid_input("타입 : ", validate_type, msg["ERR_not_valid_type"])
-    category = input("카테고리 : ")
+    while True:
+        category = input("카테고리 : ")
+        if category in service.get_categories():
+            break
+        print(msg["ERR_not_valid_cate"])
     amount = int(get_valid_input("금액 : ", validate_amount, msg["ERR_not_valid_amount"]))
-    transaction = Transaction(id=uuid.uuid4().hex[:8], date = date, type = transaction_type, category=category, amount=int(amount))
+    memo = input("메모 : ")
+    tags_input = input("태그(쉼표로 구분) : ")
+    tags = [
+        tag.strip()
+        for tag in tags_input.split(",")
+        if tag.strip()
+    ]
+    transaction = Transaction(id=uuid.uuid4().hex[:8], date = date, type = transaction_type, category=category, amount=int(amount), memo=memo, tags=tags)
     service.add_transaction(transaction)
     print(f"저장 완료. ID = {transaction.id}")
 
@@ -38,7 +48,7 @@ def handle_list(args):
     print(msg["MENU_list"])
     transactions = service.list_transactions(limit=args.limit)
     for tx in transactions:
-        print(f"{tx.id} | {tx.date} | {tx.type} | {tx.category} | {tx.amount}")
+        print(f"{tx.id} | {tx.date} | {tx.type} | {tx.category} | {tx.amount} | {tx.memo} | {','.join(tx.tags)}")
 
 def handle_search(args):
     print(msg["MENU_search"])
@@ -46,12 +56,14 @@ def handle_search(args):
         from_date=args.from_date,
         to_date=args.to_date,
         category=args.category,
-        transaction_type=args.type
+        transaction_type=args.type,
+        q=args.q,
+        tag=args.tag
     )
     found = False
     for tx in transactions:
         found = True
-        print(f"{tx.id} | {tx.date} | {tx.type} | {tx.category} | {tx.amount}")
+        print(f"{tx.id} | {tx.date} | {tx.type} | {tx.category} | {tx.amount} | {tx.memo} | {','.join(tx.tags)}")
     if not found: 
         print(msg["no_result"])
 
@@ -73,7 +85,6 @@ def handle_summary(args):
         if result['expense'] > budget:
             print(msg["exceed_budget"])
 
-
 def handle_delete(args):
     print(msg["MENU_delete"])
     if not args.id:
@@ -90,12 +101,17 @@ def handle_update(args):
     if not args.id:
         print(msg["ID_to_update"])
         return
+    if (args.category is not None and args.category not in service.get_categories()):
+        print(msg["ERR_not_valid_cate"])
+        return
     updated = service.update_transactions(
         transaction_id=args.id,
         date=args.date,
         transaction_type=args.type,
         category=args.category,
-        amount=args.amount
+        amount=args.amount,
+        memo=args.memo,
+        tags=args.tags.split(",") if args.tags else None
     )
     if updated:
         print(msg["complete_update"])
@@ -132,7 +148,7 @@ def handle_budget(args):
 
 def handle_export(args):
     if not args.month and not (args.from_date and args.to_date):
-        print("--month 또는 --from-date/--to-date 조건이 필요합니다.")
+        print(msg["ERR_export_command"])
         exit(1)
     count = service.export_csv(args.out, args.month, args.from_date, args.to_date)
     print(f"{count}건을 {args.out}에 저장했습니다.")
@@ -152,6 +168,8 @@ def create_parser():
     search_parser.add_argument("--to-date")
     search_parser.add_argument("--category")
     search_parser.add_argument("--type")
+    search_parser.add_argument("--q")
+    search_parser.add_argument("--tag")
     summary_parser = subparsers.add_parser("summary")
     summary_parser.add_argument("--month", required=True)
     summary_parser.add_argument("--top", type=int, default=5)
@@ -168,6 +186,8 @@ def create_parser():
     update_parser.add_argument("--date")
     update_parser.add_argument("--category")
     update_parser.add_argument("--type")
+    update_parser.add_argument("--memo")
+    update_parser.add_argument("--tags")
     category_parser = subparsers.add_parser("category")
     category_parser.add_argument("action", choices=["add", "list", "remove"])
     category_parser.add_argument("value", nargs="?")

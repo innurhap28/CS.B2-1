@@ -3,6 +3,7 @@ from storage.repository import Repository
 from typing import Iterator
 from models.transaction import Transaction
 import csv, uuid
+from utils.decorators import handle_error
 
 class TransactionService:
     def __init__(self):
@@ -13,13 +14,15 @@ class TransactionService:
 
     def list_transactions(self, limit=None) -> Iterator[Transaction]:
         count = 0
-        for tx in self.repository.iter_transactions():
+        transactions = list(self.repository.iter_transactions())
+        for tx in reversed(transactions):
             yield tx
             count += 1
             if limit and count >= limit:
                 break
-
-    def search_transactions(self, from_date=None, to_date=None, category=None, transaction_type=None):
+    
+    def search_transactions(self, from_date=None, to_date=None, category=None, transaction_type=None, q=None, tag=None):
+        results = []
         for tx in self.repository.iter_transactions():
             if from_date and tx.date < from_date:
                 continue
@@ -29,7 +32,12 @@ class TransactionService:
                 continue
             if transaction_type and tx.type != transaction_type:
                 continue
-            yield tx
+            if q and q.lower() not in tx.memo.lower():
+                continue
+            if tag and tag not in tx.tags:
+                continue
+            results.append(tx)
+        yield from reversed(results)
     
     def get_monthly_summary(self, month=None):
         income = 0
@@ -48,10 +56,11 @@ class TransactionService:
             return None
         return {"income": income, "expense": expense, "balance": income - expense, "top_categories": top_categories}
     
+    @handle_error
     def delete_transactions(self, transaction_id: str) -> bool:
         return self.repository.delete_transaction(transaction_id)
 
-    def update_transactions(self, transaction_id, date=None, transaction_type=None, category=None, amount=None):
+    def update_transactions(self, transaction_id, date, transaction_type, category, amount, memo, tags):
         return self.repository.update_transaction(transaction_id, date, transaction_type, category, amount)
 
     def get_categories(self):
@@ -66,6 +75,7 @@ class TransactionService:
                 return False
         return self.repository.remove_category(category)
     
+    @handle_error
     def export_csv(
             self, output_file: str, 
             month: str | None = None,
@@ -87,12 +97,15 @@ class TransactionService:
                 count += 1
         return count
     
+    @handle_error
     def import_csv(self, csv_file: str):
         import csv
         count = 0
         with open(csv_file, newline="", encoding="utf-8") as file:
             reader = csv.DictReader(file)
             for row in reader:
+                if row["category"] not in self.get_categories():
+                    continue
                 tx = Transaction(
                     id=str(uuid.uuid4())[:8],
                     date=row["date"], type=row["type"], category=row["category"], 

@@ -1,5 +1,4 @@
 # 입력 검증
-
 from datetime import datetime
 
 def validate_date(date_str: str) -> bool:

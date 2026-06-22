@@ -1,5 +1,4 @@
 # 거래 데이터 구조 정의
-
 from dataclasses import dataclass, field
 
 @dataclass

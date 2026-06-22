@@ -32,11 +32,7 @@ class Repository:
             self.file_manager.rewrite_jsonl(remaining_transactions)
         return deleted
     
-    def update_transaction(self, transaction_id: str, 
-                           date: str | None = None,
-                           transaction_type: str | None = None,
-                           category: str | None = None,
-                           amount: int | None = None) -> bool:
+    def update_transaction(self, transaction_id: str, date=None, transaction_type=None, category=None, amount=None, memo=None, tags=None) -> bool:
         updated = False
         transactions = []
         for transaction in self.iter_transactions():
@@ -49,6 +45,10 @@ class Repository:
                     transaction.category = category
                 if amount is not None:
                     transaction.amount = amount
+                if memo is not None:
+                    transaction.memo = memo
+                if tags is not None:
+                    transaction.tags = tags
                 updated = True
             transactions.append(transaction.to_dict())
         if updated:
