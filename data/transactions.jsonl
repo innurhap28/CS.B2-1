@@ -5,3 +5,4 @@
 {"id": "ddc6ab28", "date": "2021-02-07", "type": "expense", "category": "etc", "amount": 4500, "memo": "", "tags": []}
 {"id": "133e0c20", "date": "2026-06-22", "type": "expense", "category": "food", "amount": 9800, "memo": "hamburger at workplace", "tags": ["dinner", "fastfood"]}
 {"id": "9807f52a", "date": "2026-06-22", "type": "expense", "category": "cigarette", "amount": 4500, "memo": "cigarette", "tags": ["cigarette"]}
+{"id": "3cb126ee", "date": "2026-06-29", "type": "expense", "category": "food", "amount": 51000, "memo": "명륜진사갈비", "tags": ["food", "dinner", "meat"]}

@@ -4,6 +4,7 @@ from services.transaction_service import TransactionService
 from models.transaction import Transaction
 from utils.validators import (validate_amount, validate_date, validate_type)
 from services.budget_service import BudgetService
+from utils.decorators import log_command, handle_error
 
 def load_messages(lang="ko"):
     base_path = os.path.dirname(os.path.abspath(__file__))
@@ -200,6 +201,7 @@ def create_parser():
     import_parser.add_argument("--from-file", required=True)
     return parser
 
+@log_command
 def main():
     args = create_parser().parse_args()
     handlers = {
