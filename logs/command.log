@@ -1,6 +1,0 @@
-[2026-06-29 15:21:35] main.py
-[2026-06-29 15:21:57] main.py add
-[2026-06-29 15:23:02] main.py list
-[2026-06-29 15:23:08] main.py list --limit 5
-[2026-06-29 15:23:30] main.py category --list
-[2026-06-29 15:23:34] main.py category list

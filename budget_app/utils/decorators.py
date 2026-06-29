@@ -1,5 +1,5 @@
 from functools import wraps
-from utils.logger import write_log
+from ..utils.logger import write_log
 import sys
 
 def handle_error(func):

@@ -1,9 +1,9 @@
 # 거래 관련 기능 담당
-from storage.repository import Repository
+from ..storage.repository import Repository
 from typing import Iterator
-from models.transaction import Transaction
+from ..models.transaction import Transaction
 import csv, uuid
-from utils.decorators import handle_error
+from ..utils.decorators import handle_error
 
 class TransactionService:
     def __init__(self):

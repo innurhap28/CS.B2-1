@@ -1,5 +1,5 @@
 # 예산 전담
-from storage.repository import Repository
+from ..storage.repository import Repository
 
 class BudgetService:
     def __init__(self):

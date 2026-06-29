@@ -2,9 +2,12 @@ from pathlib import Path
 import json
 from typing import Iterator
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "data"
+
 class FileManager:
-    def __init__(self, data_dir: str = "data"):
-        self.data_dir = Path(data_dir)
+    def __init__(self, data_dir: Path | None = None):
+        self.data_dir = data_dir or DATA_DIR
 
         self.transactions_file = self.data_dir / "transactions.jsonl"
         self.categories_file = self.data_dir / "categories.json"

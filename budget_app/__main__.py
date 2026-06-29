@@ -1,10 +1,10 @@
 # 프로그램 진입점
 import argparse, uuid, json, os
-from services.transaction_service import TransactionService
-from models.transaction import Transaction
-from utils.validators import (validate_amount, validate_date, validate_type)
-from services.budget_service import BudgetService
-from utils.decorators import log_command, handle_error
+from .services.transaction_service import TransactionService
+from .models.transaction import Transaction
+from .utils.validators import (validate_amount, validate_date, validate_type)
+from .services.budget_service import BudgetService
+from .utils.decorators import log_command, handle_error
 
 def load_messages(lang="ko"):
     base_path = os.path.dirname(os.path.abspath(__file__))

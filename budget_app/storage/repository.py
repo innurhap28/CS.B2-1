@@ -1,5 +1,5 @@
-from models.transaction import Transaction
-from storage.file_manager import FileManager
+from ..models.transaction import Transaction
+from .file_manager import FileManager
 from typing import Iterator
 
 class Repository:
