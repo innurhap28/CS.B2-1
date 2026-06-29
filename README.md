@@ -16,34 +16,36 @@ Python 기반의 파일 저장형(Console) 가계부 프로그램
 
 ```text
 CS.B2-1/
-│
-├── main.py                  # 프로그램 시작점, 메뉴 출력
-│
-├── messages.json            # 출력 메시지 상수 분리
-│
-├── models/
-│   └── transaction.py       # Transaction 클래스
-│
-├── services/
-│   ├── transaction_service.py   # 수입/지출 CRUD
-│   └── budget_service.py        # 예산 관리
-│
-├── storage/
-│   └── repository.py        # 파일 입출력(JSON/JSONL)
-│   └── file_manager.py      # 파일 저장 관리
-│
-├── utils/
-│   ├── decorators.py        # 로그, 예외처리 데코레이터
-│   ├── validators.py        # 입력값 검증
-│   └── logger.py            # 로그 작성 로직
-│
-├── data/
-│   ├── transactions.jsonl   # 거래내역
-│   ├── categories.json      # 카테고리 목록
-│   └── budgets.json         # 예산 정보
-│
-├── logs/
-│   └── command.log          # 로그 저장
+├── budget_app/
+│   ├── __init__.py
+│   ├── __main__.py
+│   ├── messages.py
+│   ├── messages.json
+│   │
+│   ├── models/
+│   │   └── transaction.py
+│   │
+│   ├── services/
+│   │   ├── transaction_service.py
+│   │   ├── category_service.py
+│   │   └── budget_service.py
+│   │
+│   ├── storage/
+│   │   ├── file_manager.py
+│   │   └── repository.py
+│   │
+│   ├── utils/
+│   │   ├── decorators.py
+│   │   ├── logger.py
+│   │   └── validators.py
+│   │
+│   ├── data/
+│   │   ├── transactions.jsonl
+│   │   ├── categories.json
+│   │   └── budgets.json
+│   │
+│   └── logs/
+│       └── command.log
 │
 └── README.md
 ```
@@ -55,7 +57,7 @@ CS.B2-1/
 ### 거래 추가
 
 ```bash
-python main.py add
+python -m budget_app add
 ```
 
 - 대화형 입력을 통해 거래에 대한 정보를 등록하여 새로운 거래 내역을 추가하는 기능. 
@@ -68,9 +70,9 @@ python main.py add
 ### 거래 목록 조회
 
 ```bash
-python main.py list
+python -m budget_app list
 
-python main.py list --limit 20
+python -m budget_app list --limit 20
 ```
 
 - 저장된 거래 내역을 최신 순으로 조회하는 기능. 
@@ -83,13 +85,13 @@ python main.py list --limit 20
 ### 거래 검색
 
 ```bash
-python main.py search --category food
+python -m budget_app search --category food
 
-python main.py search --type expense
+python -m budget_app search --type expense
 
-python main.py search --from-date 2026-06-01 --to-date 2026-06-30
+python -m budget_app search --from-date 2026-06-01 --to-date 2026-06-30
 
-python main.py search --tag lunch
+python -m budget_app search --tag lunch
 ```
 
 * 기간, 카테고리, 거래 유형, 태그 등의 조건을 이용하여 원하는 거래 내역을 검색하는 기능.
@@ -101,7 +103,7 @@ python main.py search --tag lunch
 ### 월별 요약
 
 ```bash
-python main.py summary --month 2026-06
+python -m budget_app summary --month 2026-06
 ```
 
 * 특정 월의 총수입, 총지출, 잔액 및 카테고리별 지출 내역을 요약하여 출력하는 기능.
@@ -113,7 +115,7 @@ python main.py summary --month 2026-06
 ### 예산 설정
 
 ```bash
-python main.py budget set --month 2026-06 --amount 500000
+python -m budget_app budget set --month 2026-06 --amount 500000
 ```
 
 * 지정한 월의 예산을 설정하거나 기존 예산을 변경하는 기능.
@@ -125,7 +127,7 @@ python main.py budget set --month 2026-06 --amount 500000
 ### 예산 조회
 
 ```bash
-python main.py budget get --month 2026-06
+python -m budget_app budget get --month 2026-06
 ```
 
 * 특정 월에 설정된 예산을 조회하는 기능.
@@ -137,7 +139,7 @@ python main.py budget get --month 2026-06
 ### 카테고리 추가
 
 ```bash
-python main.py category add food
+python -m budget_app category add food
 ```
 
 * 새로운 카테고리를 등록하는 기능.
@@ -149,7 +151,7 @@ python main.py category add food
 ### 카테고리 목록 조회
 
 ```bash
-python main.py category list
+python -m budget_app category list
 ```
 
 * 현재 등록되어 있는 모든 카테고리를 조회하는 기능.
@@ -161,7 +163,7 @@ python main.py category list
 ### 카테고리 삭제
 
 ```bash
-python main.py category remove food
+python -m budget_app category remove food
 ```
 
 * 등록된 카테고리를 삭제하는 기능.
@@ -173,7 +175,7 @@ python main.py category remove food
 ### 거래 수정
 
 ```bash
-python main.py update \
+python -m budget_app update \
   --id abc123 \
   --amount 30000 \
   --category food
@@ -188,7 +190,7 @@ python main.py update \
 ### 거래 삭제
 
 ```bash
-python main.py delete --id abc123
+python -m budget_app delete --id abc123
 ```
 
 * 거래 ID를 기준으로 거래 내역을 삭제하는 기능.
@@ -200,7 +202,7 @@ python main.py delete --id abc123
 ### CSV 내보내기
 
 ```bash
-python main.py export \
+python -m budget_app export \
   --out output.csv \
   --month 2026-06
 ```
@@ -214,7 +216,7 @@ python main.py export \
 ### CSV 가져오기
 
 ```bash
-python main.py import \
+python -m budget_app import \
   --from transactions.csv
 ```
 
@@ -309,22 +311,7 @@ date,type,category,amount,memo,tags
 
 ---
 
-## 6. 주요 기능
-
-* 거래 추가(Add)
-* 거래 목록 조회(List)
-* 거래 검색(Search)
-* 거래 수정(Update)
-* 거래 삭제(Delete)
-* 월별 요약(Summary)
-* 예산 설정 및 조회(Budget)
-* 카테고리 관리(Category)
-* CSV 가져오기(Import)
-* CSV 내보내기(Export)
-
----
-
-## 7. 구현 특징
+## 6. 구현 특징
 
 ### 제너레이터 기반 스트리밍
 
@@ -355,15 +342,3 @@ def get_transaction(self, transaction_id: str) -> Transaction | None:
     ...
 ```
 
----
-
-## 8. 개발 환경
-
-* Python 3.11+
-* argparse
-* json
-* csv
-* pathlib
-* dataclasses
-* typing
-* uuid

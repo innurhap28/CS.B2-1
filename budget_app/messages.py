@@ -1,4 +1,4 @@
-{
+MESSAGES = {
     "ko": {
         "MENU_add": "- # 거래 추가 ---------------",
         "MENU_list": "- # 거래 목록 ---------------",
@@ -29,6 +29,14 @@
         "ERR_not_valid_type": "거래 타입이 올바르지 않습니다. (income/expense)",
         "ERR_not_valid_amount": "양의 정수를 입력하세요.",
         "ERR_not_valid_cate": "존재하지 않는 카테고리입니다. 카테고리 등록 후 추가해주세요.",
-        "ERR_export_command": "--month 또는 --from-date/--to-date 조건이 필요합니다."
+        "ERR_export_command": "--month 또는 --from-date/--to-date 조건이 필요합니다.",
+
+        "ERR_filenotfound": "[ERROR] 파일을 찾을 수 없습니다.",
+        "ERR_value": "[ERROR] 잘못된 입력입니다.",
+        "ERR_keyboardinter": "[ERROR] 사용자가 프로그램을 종료했습니다.",
+        "ERR_except": "[ERROR] 예기치 않은 오류가 발생했습니다."
     }
 }
+
+def load_messages(lang: str = "ko") -> dict:
+    return MESSAGES.get(lang, MESSAGES["ko"])

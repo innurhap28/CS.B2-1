@@ -1,17 +1,11 @@
 # 프로그램 진입점
-import argparse, uuid, json, os
+import argparse, uuid
 from .services.transaction_service import TransactionService
 from .models.transaction import Transaction
 from .utils.validators import (validate_amount, validate_date, validate_type)
 from .services.budget_service import BudgetService
 from .utils.decorators import log_command, handle_error
-
-def load_messages(lang="ko"):
-    base_path = os.path.dirname(os.path.abspath(__file__))
-    json_path = os.path.join(base_path, "messages.json")
-    with open(json_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    return data.get(lang, data["ko"])
+from .messages import load_messages
 
 msg = load_messages(lang="ko")
 service = TransactionService()
@@ -201,6 +195,7 @@ def create_parser():
     import_parser.add_argument("--from-file", required=True)
     return parser
 
+@handle_error
 @log_command
 def main():
     args = create_parser().parse_args()

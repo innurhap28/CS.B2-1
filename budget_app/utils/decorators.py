@@ -1,14 +1,34 @@
 from functools import wraps
 from ..utils.logger import write_log
 import sys
+from ..messages import load_messages
+
+msg = load_messages(lang="ko")
 
 def handle_error(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
+        except FileNotFoundError as e:
+            print(msg["ERR_filenotfound"])
+            print(f"원인 : {e}")
+            sys.exit(1)
+
+        except ValueError as e:
+            print(msg["ERR_"])
+            print(f"원인 : {e}")
+            sys.exit(2)
+
+        except KeyboardInterrupt as e:
+            print("\n" + msg["ERR_keyboardinter"])
+            sys.exit(130)
+
         except Exception as e:
-            print(f"[ERROR] {e}")
+            print(msg["ERR_except"])
+            print(f"원인 : {e}")
+            print("입력값을 확인하거나 다시 시도하세요.")
+            sys.exit(99)
     return wrapper
 
 def log_command(func):

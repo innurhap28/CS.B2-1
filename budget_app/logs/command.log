@@ -15,3 +15,12 @@
 [2026-06-29 17:18:09] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py list --limit 3
 [2026-06-29 17:18:54] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py export --out test.csv --month 2028-03
 [2026-06-29 17:19:17] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from test.csv
+[2026-06-29 17:30:31] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py add
+[2026-06-29 17:31:33] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from-file abc.csv
+[2026-06-29 17:34:12] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py add
+[2026-06-29 17:34:59] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py add
+[2026-06-29 17:35:48] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py add
+[2026-06-29 18:00:22] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py add
+[2026-06-29 18:03:40] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py add
+[2026-06-29 18:21:49] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py add
+[2026-06-29 18:22:06] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py add
