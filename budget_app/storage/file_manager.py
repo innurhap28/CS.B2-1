@@ -36,6 +36,25 @@ class FileManager:
             for line in file:
                 yield json.loads(line)
 
+    def reverse_stream_jsonl(path):                 # 역방향 제너레이터 기반 스트리밍 처리
+        with open(path, "rb") as f:
+            f.seek(0,2)
+            pos = f.tell()
+            buffer = b""
+
+            while pos > 0:
+                pos -= 1
+                f.seek(pos)
+                c = f.read(1)
+                if c == b"\n":
+                    if buffer:
+                        yield json.loads(buffer[::-1].decode())
+                        buffer = b""
+                else:
+                        buffer += c
+            if buffer:
+                yield json.loads(buffer[::-1].decode())
+
     def rewrite_jsonl(self, transactions: list[dict]) -> None:
         with self.transactions_file.open(mode="w", encoding="utf-8") as file:
             for transaction in transactions:

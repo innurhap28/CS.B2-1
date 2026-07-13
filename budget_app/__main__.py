@@ -1,10 +1,10 @@
 # 프로그램 진입점
-import argparse, uuid
+import argparse, uuid, sys
 from .services.transaction_service import TransactionService
 from .models.transaction import Transaction
 from .utils.validators import (validate_amount, validate_date, validate_type)
 from .services.budget_service import BudgetService
-from .utils.decorators import log_command, handle_error
+from .utils.decorators import log_command, handle_error, measure_time
 from .messages import load_messages
 from .services.csv_service import CsvService
 
@@ -47,6 +47,7 @@ def handle_list(args):
     for tx in transactions:
         print(f"{tx.id} | {tx.date} | {tx.type} | {tx.category} | {tx.amount} | {tx.memo} | {','.join(tx.tags)}")
 
+@measure_time
 def handle_search(args):
     print(msg["MENU_search"])
     transactions = service.search_transactions(
@@ -214,6 +215,7 @@ def main():
         "export": handle_export
     }
     handlers[args.command](args)
+    return 0
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

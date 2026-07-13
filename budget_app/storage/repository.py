@@ -10,8 +10,12 @@ class Repository:
     def add_transaction(self, transaction: Transaction) -> None:
         self.file_manager.append_jsonl(transaction.to_dict())
     
-    def iter_transactions(self) -> Iterator[Transaction]:
-        for data in self.file_manager.stream_jsonl():
+    def iter_transactions(self, reverse: bool = False) -> Iterator[Transaction]:
+        if reverse:
+            stream = self.file_manager.reverse_stream_jsonl()
+        else:
+            stream = self.file_manager.stream_jsonl()
+        for data in stream:
             yield Transaction.from_dict(data)
 
     def find_by_id(self, transaction_id: str) -> Transaction | None:

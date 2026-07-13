@@ -13,8 +13,7 @@ class TransactionService:
 
     def list_transactions(self, limit=None) -> Iterator[Transaction]:
         count = 0
-        transactions = list(self.repository.iter_transactions())
-        for tx in reversed(transactions):
+        for tx in self.repository.iter_transactions(reverse=True):
             yield tx
             count += 1
             if limit and count >= limit:
@@ -22,7 +21,7 @@ class TransactionService:
     
     def search_transactions(self, from_date=None, to_date=None, category=None, transaction_type=None, q=None, tag=None):
         results = []
-        for tx in self.repository.iter_transactions():
+        for tx in self.repository.iter_transactions(reverse=True):
             if from_date and tx.date < from_date:
                 continue
             if to_date and tx.date > to_date:
@@ -35,8 +34,7 @@ class TransactionService:
                 continue
             if tag and tag not in tx.tags:
                 continue
-            results.append(tx)
-        yield from reversed(results)
+            yield tx
     
     def get_monthly_summary(self, month=None):
         income = 0
