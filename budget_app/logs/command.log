@@ -24,3 +24,90 @@
 [2026-06-29 18:03:40] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py add
 [2026-06-29 18:21:49] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py add
 [2026-06-29 18:22:06] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py add
+[2026-07-11 00:35:07] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 00:37:48] C:\Users\River\CS.B2-1\budget_app\__main__.py budget --month 2026-08 --amount 500000
+[2026-07-11 00:38:23] C:\Users\River\CS.B2-1\budget_app\__main__.py budget
+[2026-07-11 00:38:35] C:\Users\River\CS.B2-1\budget_app\__main__.py budget add
+[2026-07-11 00:38:54] C:\Users\River\CS.B2-1\budget_app\__main__.py budget set --month 2026-07 --amount 500000
+[2026-07-11 00:42:15] C:\Users\River\CS.B2-1\budget_app\__main__.py budget set --month 2026-07 --amount 500000
+[2026-07-11 00:44:11] C:\Users\River\CS.B2-1\budget_app\__main__.py budget set --month 2026-07 --amount 500000
+[2026-07-11 01:04:35] C:\Users\River\CS.B2-1\budget_app\__main__.py budget set --month 2026-07 --amount 500000
+[2026-07-11 01:08:59] C:\Users\River\CS.B2-1\budget_app\__main__.py budget set --month 2026-06 --amount 500000
+[2026-07-11 01:13:01] C:\Users\River\CS.B2-1\budget_app\__main__.py budget set --month 2026-07 --amount 500000
+[2026-07-11 01:13:41] C:\Users\River\CS.B2-1\budget_app\__main__.py budget set --month 2026-07 --amount 500000
+[2026-07-11 01:14:02] C:\Users\River\CS.B2-1\budget_app\__main__.py budget set --month 2026-06 --amount 500000
+[2026-07-11 01:26:30] C:\Users\River\CS.B2-1\budget_app\__main__.py category add
+[2026-07-11 01:26:36] C:\Users\River\CS.B2-1\budget_app\__main__.py category add salary
+[2026-07-11 01:27:12] C:\Users\River\CS.B2-1\budget_app\__main__.py category add salary
+[2026-07-11 01:27:18] C:\Users\River\CS.B2-1\budget_app\__main__.py category add food
+[2026-07-11 01:27:29] C:\Users\River\CS.B2-1\budget_app\__main__.py category delete food
+[2026-07-11 01:27:34] C:\Users\River\CS.B2-1\budget_app\__main__.py category list
+[2026-07-11 01:27:38] C:\Users\River\CS.B2-1\budget_app\__main__.py category remove food
+[2026-07-11 01:27:44] C:\Users\River\CS.B2-1\budget_app\__main__.py category remove salary
+[2026-07-11 01:27:57] C:\Users\River\CS.B2-1\budget_app\__main__.py category remove salary\
+[2026-07-11 01:27:59] C:\Users\River\CS.B2-1\budget_app\__main__.py category remove salary\
+[2026-07-11 01:28:01] C:\Users\River\CS.B2-1\budget_app\__main__.py category remove salary
+[2026-07-11 01:28:08] C:\Users\River\CS.B2-1\budget_app\__main__.py category remove food
+[2026-07-11 01:28:14] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 01:28:52] C:\Users\River\CS.B2-1\budget_app\__main__.py category list
+[2026-07-11 01:31:46] C:\Users\River\CS.B2-1\budget_app\__main__.py category add food
+[2026-07-11 01:31:50] C:\Users\River\CS.B2-1\budget_app\__main__.py category add salary
+[2026-07-11 01:31:54] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 01:32:48] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 01:33:33] C:\Users\River\CS.B2-1\budget_app\__main__.py list
+[2026-07-11 01:33:36] C:\Users\River\CS.B2-1\budget_app\__main__.py list --limit 1
+[2026-07-11 01:33:51] C:\Users\River\CS.B2-1\budget_app\__main__.py summary
+[2026-07-11 01:33:57] C:\Users\River\CS.B2-1\budget_app\__main__.py summary --month 2026-07
+[2026-07-11 01:34:17] C:\Users\River\CS.B2-1\budget_app\__main__.py category add snack
+[2026-07-11 01:34:24] C:\Users\River\CS.B2-1\budget_app\__main__.py category add beverage
+[2026-07-11 01:34:30] C:\Users\River\CS.B2-1\budget_app\__main__.py category add leisure
+[2026-07-11 01:34:39] C:\Users\River\CS.B2-1\budget_app\__main__.py category add transport
+[2026-07-11 01:34:48] C:\Users\River\CS.B2-1\budget_app\__main__.py category add etc
+[2026-07-11 01:35:08] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 01:35:51] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 01:36:10] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 01:36:47] C:\Users\River\CS.B2-1\budget_app\__main__.py summary --month 2026-07
+[2026-07-11 01:37:52] C:\Users\River\CS.B2-1\budget_app\__main__.py search --type expense
+[2026-07-11 01:37:57] C:\Users\River\CS.B2-1\budget_app\__main__.py search --type income
+[2026-07-11 01:38:05] C:\Users\River\CS.B2-1\budget_app\__main__.py search --memo lunch
+[2026-07-11 01:38:11] C:\Users\River\CS.B2-1\budget_app\__main__.py search --memo
+[2026-07-11 01:38:22] C:\Users\River\CS.B2-1\budget_app\__main__.py search
+[2026-07-11 01:38:37] C:\Users\River\CS.B2-1\budget_app\__main__.py search --category food
+[2026-07-11 01:38:42] C:\Users\River\CS.B2-1\budget_app\__main__.py search --category leisure
+[2026-07-11 01:39:43] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 01:41:07] C:\Users\River\CS.B2-1\budget_app\__main__.py category add drinking
+[2026-07-11 01:41:10] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 01:41:44] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 01:41:57] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 01:42:42] C:\Users\River\CS.B2-1\budget_app\__main__.py category add health
+[2026-07-11 01:42:45] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 01:43:26] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 01:43:42] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 01:44:16] C:\Users\River\CS.B2-1\budget_app\__main__.py summary --month 2026-07
+[2026-07-11 01:44:37] C:\Users\River\CS.B2-1\budget_app\__main__.py category add rent
+[2026-07-11 01:44:40] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-11 01:45:03] C:\Users\River\CS.B2-1\budget_app\__main__.py summary --month 2026-07
+[2026-07-11 01:45:37] C:\Users\River\CS.B2-1\budget_app\__main__.py search --from-date 2026-07-09
+[2026-07-11 01:45:49] C:\Users\River\CS.B2-1\budget_app\__main__.py search --to-date 2026-07-08
+[2026-07-11 01:46:01] C:\Users\River\CS.B2-1\budget_app\__main__.py search --type expense
+[2026-07-11 01:46:05] C:\Users\River\CS.B2-1\budget_app\__main__.py search --type income
+[2026-07-11 01:46:12] C:\Users\River\CS.B2-1\budget_app\__main__.py search --q lunch
+[2026-07-11 01:46:18] C:\Users\River\CS.B2-1\budget_app\__main__.py search --q cold
+[2026-07-11 01:46:26] C:\Users\River\CS.B2-1\budget_app\__main__.py search --tag pharmacy
+[2026-07-11 01:47:25] C:\Users\River\CS.B2-1\budget_app\__main__.py category list
+[2026-07-11 01:47:38] C:\Users\River\CS.B2-1\budget_app\__main__.py delete --id 1
+[2026-07-11 01:47:52] C:\Users\River\CS.B2-1\budget_app\__main__.py delete --id 83e71213
+[2026-07-11 01:48:25] C:\Users\River\CS.B2-1\budget_app\__main__.py export --out 2026-07test.csv --month 2026-07
+[2026-07-11 01:49:33] C:\Users\River\CS.B2-1\budget_app\__main__.py import --from 2026-07test.csv
+[2026-07-11 01:50:05] C:\Users\River\CS.B2-1\budget_app\__main__.py import --from 2026-07test.csv
+[2026-07-11 01:50:19] C:\Users\River\CS.B2-1\budget_app\__main__.py import --from 2026-07test.csv
+[2026-07-11 01:52:49] C:\Users\River\CS.B2-1\budget_app\__main__.py
+[2026-07-11 01:52:51] C:\Users\River\CS.B2-1\budget_app\__main__.py -h
+[2026-07-11 01:53:08] C:\Users\River\CS.B2-1\budget_app\__main__.py --help
+[2026-07-11 01:53:54] C:\Users\River\CS.B2-1\budget_app\__main__.py summary --month 2026-07 -top 3
+[2026-07-11 01:53:59] C:\Users\River\CS.B2-1\budget_app\__main__.py summary --month 2026-07 --top 3
+[2026-07-11 01:54:03] C:\Users\River\CS.B2-1\budget_app\__main__.py summary --month 2026-07 --top 2
+[2026-07-12 16:46:09] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-12 16:47:20] C:\Users\River\CS.B2-1\budget_app\__main__.py add
+[2026-07-12 16:47:54] C:\Users\River\CS.B2-1\budget_app\__main__.py summary 2026-07
+[2026-07-12 16:48:03] C:\Users\River\CS.B2-1\budget_app\__main__.py summary --month 2026-07

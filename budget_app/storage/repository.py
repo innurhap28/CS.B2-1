@@ -56,26 +56,26 @@ class Repository:
         return updated
     
     def get_categories(self) -> list[str]:
-        return self.file_manager.read_json(self.file_manager.categories_file)
+        return self.file_manager.read_jsonl(self.file_manager.categories_file, default=[])
 
     def add_category(self, category: str) -> bool:
-        categories = self.file_manager.read_json(self.file_manager.categories_file)
+        categories = self.file_manager.read_jsonl(self.file_manager.categories_file, default=[])
         if category in categories:
             return False
         categories.append(category)
-        self.file_manager.write_json(self.file_manager.categories_file, categories)
+        self.file_manager.write_jsonl(self.file_manager.categories_file, categories)
         return True
 
     def remove_category(self, category):
-        categories = self.file_manager.read_json(self.file_manager.categories_file)
+        categories = self.file_manager.read_jsonl(self.file_manager.categories_file, default=[])
         if category not in categories:
             return False
         categories.remove(category)
-        self.file_manager.write_json(self.file_manager.categories_file, categories)
+        self.file_manager.write_jsonl(self.file_manager.categories_file, categories)
         return True
     
     def load_budgets(self) -> dict:
-        return self.file_manager.read_json(self.file_manager.budgets_file)
+        return self.file_manager.read_jsonl(self.file_manager.budgets_file, default={})
     
     def save_budgets(self, budgets: dict) -> None:
-        self.file_manager.write_json(self.file_manager.budgets_file, budgets)
+        self.file_manager.write_jsonl(self.file_manager.budgets_file, budgets)

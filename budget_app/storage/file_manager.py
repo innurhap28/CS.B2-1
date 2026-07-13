@@ -2,7 +2,7 @@ from pathlib import Path
 import json
 from typing import Iterator
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DATA_DIR = BASE_DIR / "data"
 
 class FileManager:
@@ -10,18 +10,21 @@ class FileManager:
         self.data_dir = data_dir or DATA_DIR
 
         self.transactions_file = self.data_dir / "transactions.jsonl"
-        self.categories_file = self.data_dir / "categories.json"
-        self.budgets_file = self.data_dir / "budgets.json"
+        self.categories_file = self.data_dir / "categories.jsonl"
+        self.budgets_file = self.data_dir / "budgets.jsonl"
 
     def ensure_files(self) -> None:                 # data 파일이 없을 경우 생성
         self.data_dir.mkdir(exist_ok=True)
         self.transactions_file.touch(exist_ok=True)
 
         if not self.categories_file.exists():
-            self.categories_file.write_text('["food", "transport", "rent", "etc"]', encoding="utf-8")
+            with self.categories_file.open("w", encoding="utf-8") as file:
+                for category in ["food", "transport", "rent", "etc"]:
+                    json.dump(category, file, ensure_ascii=False)
+                    file.write("\n")
 
         if not self.budgets_file.exists():
-            self.budgets_file.write_text("{}", encoding="utf-8")
+            self.budgets_file.touch()
 
     def append_jsonl(self, data: dict) -> None:
         with self.transactions_file.open(mode="a", encoding="utf-8") as file:
@@ -39,10 +42,46 @@ class FileManager:
                 json.dump (transaction, file, ensure_ascii=False)
                 file.write("\n")
 
-    def read_json(self, file_path: Path):
-        with file_path.open(mode="r", encoding="utf-8") as file:
-            return json.load(file)
+    def read_jsonl(self, file_path: Path, default=None):
+        if not file_path.exists():
+            return [] if default is None else default
+
+        with file_path.open("r", encoding="utf-8") as file:
+            content = file.read().strip()
+
+        if not content:
+            return [] if default is None else default
+
+        try:
+            parsed = json.loads(content)
+            if isinstance(parsed, (dict, list)):
+                return parsed
+        except json.JSONDecodeError:
+            pass
+
+        result = []
+        with file_path.open("r", encoding="utf-8") as file:
+            for line in file:
+                line = line.strip()
+                if line:
+                    result.append(json.loads(line))
+
+        if not result:
+            return [] if default is None else default
+        return result
     
-    def write_json(self, file_path: Path, data):
-        with file_path.open(mode="w", encoding="utf-8") as file:
-            json.dump(data, file, ensure_ascii=False, indent=4)
+    def write_jsonl(self, file_path: Path, data):
+        with file_path.open("w", encoding="utf-8") as file:
+            if isinstance(data, dict):
+                json.dump(data, file, ensure_ascii=False, indent=2)
+                file.write("\n")
+                return
+
+            if isinstance(data, list):
+                for item in data:
+                    json.dump(item, file, ensure_ascii=False)
+                    file.write("\n")
+                return
+
+            json.dump(data, file, ensure_ascii=False)
+            file.write("\n")

@@ -6,10 +6,12 @@ from .utils.validators import (validate_amount, validate_date, validate_type)
 from .services.budget_service import BudgetService
 from .utils.decorators import log_command, handle_error
 from .messages import load_messages
+from .services.csv_service import CsvService
 
 msg = load_messages(lang="ko")
 service = TransactionService()
 budget_service = BudgetService()
+csv_service = CsvService()
 
 def get_valid_input(prompt, validator, error_message): 
     while True:
@@ -145,11 +147,11 @@ def handle_export(args):
     if not args.month and not (args.from_date and args.to_date):
         print(msg["ERR_export_command"])
         exit(1)
-    count = service.export_csv(args.out, args.month, args.from_date, args.to_date)
+    count = csv_service.export_csv(args.out, args.month, args.from_date, args.to_date)
     print(f"{count}건을 {args.out}에 저장했습니다.")
 
 def handle_import(args):
-    count = service.import_csv(args.from_file)
+    count = csv_service.import_csv(args.from_file)
     print(f"{count}건을 가져왔습니다.")
 
 def create_parser():

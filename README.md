@@ -20,14 +20,13 @@ CS.B2-1/
 │   ├── __init__.py
 │   ├── __main__.py
 │   ├── messages.py
-│   ├── messages.json
 │   │
 │   ├── models/
 │   │   └── transaction.py
 │   │
 │   ├── services/
 │   │   ├── transaction_service.py
-│   │   ├── category_service.py
+│   │   ├── csv_service.py
 │   │   └── budget_service.py
 │   │
 │   ├── storage/
@@ -39,13 +38,14 @@ CS.B2-1/
 │   │   ├── logger.py
 │   │   └── validators.py
 │   │
-│   ├── data/
-│   │   ├── transactions.jsonl
-│   │   ├── categories.json
-│   │   └── budgets.json
 │   │
 │   └── logs/
 │       └── command.log
+│
+├── data/
+│   ├── transactions.jsonl
+│   ├── categories.jsonl
+│   └── budgets.jsonl
 │
 └── README.md
 ```
@@ -254,7 +254,7 @@ CSV 형식을 검증한 후 정상적인 데이터만 등록하며, 처리 결�
 
 ---
 
-### categories.json
+### categories.jsonl
 
 - 사용 가능한 카테고리 목록 저장
 
@@ -271,7 +271,7 @@ CSV 형식을 검증한 후 정상적인 데이터만 등록하며, 처리 결�
 
 ---
 
-### budgets.json
+### budgets.jsonl
 
 - 월별 예산 저장
 
