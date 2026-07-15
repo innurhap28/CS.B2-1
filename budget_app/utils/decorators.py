@@ -16,7 +16,7 @@ def handle_error(func):
             sys.exit(1)
 
         except ValueError as e:
-            print(msg["ERR_"])
+            print(msg["ERR_value"])
             print(f"원인 : {e}")
             sys.exit(2)
 
