@@ -13,21 +13,24 @@ def handle_error(func):
         except FileNotFoundError as e:
             print(msg["ERR_filenotfound"])
             print(f"원인 : {e}")
+            print(msg["HINT_filenotfound"])
             sys.exit(1)
 
         except ValueError as e:
             print(msg["ERR_value"])
             print(f"원인 : {e}")
+            print(msg["HINT_value"])
             sys.exit(2)
 
-        except KeyboardInterrupt as e:
+        except KeyboardInterrupt:
             print("\n" + msg["ERR_keyboardinter"])
+            print(msg["HINT_keyboardinter"])
             sys.exit(130)
 
         except Exception as e:
             print(msg["ERR_except"])
             print(f"원인 : {e}")
-            print("입력값을 확인하거나 다시 시도하세요.")
+            print(msg["HINT_except"])
             sys.exit(99)
     return wrapper
 

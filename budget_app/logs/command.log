@@ -124,3 +124,24 @@
 [2026-07-23 16:53:23] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py add
 [2026-07-23 17:03:22] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py budget set --month 2026-09 --amount 200000
 [2026-07-23 17:03:31] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py summary --month 2026-07
+[2026-07-23 19:04:20] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py add
+[2026-07-23 21:12:48] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py export --out month 2026-07
+[2026-07-23 21:13:03] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py export --out --month 2026-07
+[2026-07-23 21:13:14] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py export --out OUT --month 2026-07
+[2026-07-23 21:14:24] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from-file OUT
+[2026-07-23 21:14:51] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from-file test.csv
+[2026-07-23 21:15:09] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from test.csv
+[2026-07-23 21:15:46] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from test.csv
+[2026-07-23 21:16:17] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from test.csv
+[2026-07-23 21:16:26] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from test.csv
+[2026-07-23 21:17:14] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from test.csv
+[2026-07-23 21:17:46] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from test.csv
+[2026-07-23 21:18:02] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from test.csv
+[2026-07-23 21:18:16] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from test.csv
+[2026-07-23 21:18:40] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from test.csv
+[2026-07-23 21:19:39] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from test.csv
+[2026-07-23 21:21:29] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py import --from test.csv
+[2026-07-23 21:23:58] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py add
+[2026-07-23 22:36:25] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py category --delete food
+[2026-07-23 22:36:30] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py category --remove food
+[2026-07-23 22:36:36] /Users/innuendo3712/CS.B2-1/budget_app/__main__.py category remove food

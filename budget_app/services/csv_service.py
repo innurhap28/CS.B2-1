@@ -32,10 +32,22 @@ class CsvService:
     @handle_error
     def import_csv(self, csv_file: str):
         count = 0
+        duplicate = 0
+        invalid_category = 0
         with open(csv_file, newline="", encoding="utf-8") as file:
             reader = csv.DictReader(file)
             for row in reader:
                 if row["category"] not in self.repository.get_categories():
+                    invalid_category += 1
+                    continue
+                if self.repository.exists_transaction(
+                    row["date"],
+                    row["type"],
+                    row["category"],
+                    int(row["amount"]),
+                    row["memo"]
+                ):
+                    duplicate += 1
                     continue
                 tx = Transaction(
                     id=str(uuid.uuid4())[:8],
@@ -46,4 +58,4 @@ class CsvService:
                 )
                 self.repository.add_transaction(tx)
                 count += 1
-        return count
+        return count, duplicate, invalid_category

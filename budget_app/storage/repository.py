@@ -83,3 +83,15 @@ class Repository:
     
     def save_budgets(self, budgets: dict) -> None:
         self.file_manager.write_jsonl(self.file_manager.budgets_file, budgets)
+
+    def exists_transaction(self, date: str, transaction_type: str, category: str, amount: int, memo: str,):
+        for tx in self.iter_transactions():
+            if (
+                tx.date == date
+                and tx.type == transaction_type
+                and tx.category == category
+                and tx.amount == amount
+                and tx.memo == memo
+          ):
+                  return True
+        return False

@@ -1,12 +1,11 @@
 {"id": "c60b37df", "date": "2026-07-10", "type": "income", "category": "salary", "amount": 1000000, "memo": "monthly salary from tratar", "tags": ["salary", "tratar"]}
 {"id": "35484a76", "date": "2026-07-10", "type": "expense", "category": "food", "amount": 9000, "memo": "udon noodles for lunch", "tags": ["lunch", "noodles", "udon"]}
 {"id": "a14fd2d9", "date": "2026-07-10", "type": "expense", "category": "leisure", "amount": 2000, "memo": "PC cafe time charge", "tags": ["PCcafe", "charge"]}
-{"id": "e253a954", "date": "2026-07-10", "type": "expense", "category": "leisure", "amount": 2000, "memo": "", "tags": ["PCcafe", "charge"]}
-{"id": "c96837e5", "date": "2026-07-10", "type": "expense", "category": "beverage", "amount": 4600, "memo": "soda", "tags": ["soda"]}
-{"id": "ff3d874e", "date": "2026-07-09", "type": "expense", "category": "drinking", "amount": 42900, "memo": "drinking beer with friend", "tags": ["beer", "friend"]}
-{"id": "c5ea0197", "date": "2026-07-08", "type": "expense", "category": "etc", "amount": 4000, "memo": "pharmacy", "tags": ["pharmacy"]}
-{"id": "f5f3c0e3", "date": "2026-07-08", "type": "expense", "category": "health", "amount": 5600, "memo": "got a cold", "tags": ["cold", "hospital"]}
-{"id": "62345d17", "date": "2026-07-08", "type": "expense", "category": "health", "amount": 4300, "memo": "medicine for cold", "tags": ["medicine", "pharmacy"]}
-{"id": "00eddc21", "date": "2026-07-11", "type": "expense", "category": "food", "amount": 13900, "memo": "ramen in hongdae", "tags": ["ramen", "lunch"]}
-{"id": "c1389758", "date": "2026-07-11", "type": "expense", "category": "transport", "amount": 30000, "memo": "taxi heading to home", "tags": ["taxi"]}
-{"id": "fa1a8001", "date": "2026-07-23", "type": "expense", "category": "food", "amount": 36000, "memo": "lunch", "tags": ["lunch"]}
+{"id": "848ae52e", "date": "2026-07-10", "type": "expense", "category": "leisure", "amount": 2000, "memo": "", "tags": ["PCcafe", "charge"]}
+{"id": "b058e844", "date": "2026-07-10", "type": "expense", "category": "beverage", "amount": 4600, "memo": "soda", "tags": ["soda"]}
+{"id": "a5f39c2b", "date": "2026-07-09", "type": "expense", "category": "drinking", "amount": 42900, "memo": "drinking beer with friend", "tags": ["beer", "friend"]}
+{"id": "4225e56f", "date": "2026-07-08", "type": "expense", "category": "etc", "amount": 4000, "memo": "pharmacy", "tags": ["pharmacy"]}
+{"id": "6198fcfc", "date": "2026-07-08", "type": "expense", "category": "health", "amount": 5600, "memo": "got a cold", "tags": ["cold", "hospital"]}
+{"id": "0a7bb9d5", "date": "2026-07-08", "type": "expense", "category": "health", "amount": 4300, "memo": "medicine for cold", "tags": ["medicine", "pharmacy"]}
+{"id": "62186f40", "date": "2026-07-11", "type": "expense", "category": "food", "amount": 13900, "memo": "ramen in hongdae", "tags": ["ramen", "lunch"]}
+{"id": "15b1b24b", "date": "2026-07-11", "type": "expense", "category": "transport", "amount": 30000, "memo": "taxi heading to home", "tags": ["taxi"]}

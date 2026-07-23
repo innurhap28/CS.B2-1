@@ -137,7 +137,7 @@ def handle_category(args):
         if service.remove_category(args.value):
             print(msg["complete_delete"])
         else:
-            print(msg["cannot_delete"])
+            print(msg["cannot_delete_cate"])
 
 def handle_budget(args):
     if args.budget_action == "set":
@@ -152,8 +152,12 @@ def handle_export(args):
     print(f"{count}건을 {args.out}에 저장했습니다.")
 
 def handle_import(args):
-    count = csv_service.import_csv(args.from_file)
+    count, duplicate, invalid_category = csv_service.import_csv(args.from_file)
     print(f"{count}건을 가져왔습니다.")
+    if duplicate:
+        print(f"중복된 거래 {duplicate}건을 건너뛰었습니다.")
+    if invalid_category:
+        print(f"카테고리 오류 {invalid_category}건을 건너뛰었습니다.")
 
 def create_parser():
     parser = argparse.ArgumentParser()

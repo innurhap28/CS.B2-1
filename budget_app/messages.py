@@ -19,7 +19,7 @@ MESSAGES = {
         "CATE_to_add": "추가할 카테고리를 입력하세요.",
         "CATE_to_delete": "삭제할 카테고리를 입력하세요.",
 
-        "cannot_delete": "삭제할 수 없습니다.",
+        "cannot_delete_cate": "카테고리를 사용하는 거래가 있어 삭제할 수 없습니다.",
         "existing_cate": "이미 존재하는 카테고리입니다.",
         "exceed_budget": "예산을 초과하였습니다.",
         "no_data": "데이터가 존재하지 않습니다.",
@@ -34,7 +34,12 @@ MESSAGES = {
         "ERR_filenotfound": "[ERROR] 파일을 찾을 수 없습니다.",
         "ERR_value": "[ERROR] 잘못된 입력입니다.",
         "ERR_keyboardinter": "[ERROR] 사용자가 프로그램을 종료했습니다.",
-        "ERR_except": "[ERROR] 예기치 않은 오류가 발생했습니다."
+        "ERR_except": "[ERROR] 예기치 않은 오류가 발생했습니다.",
+
+        "HINT_filenotfound": "힌트 : 파일 경로와 파일명을 확인하세요.",
+        "HINT_value": "힌트 : 입력 형식을 확인하세요.",
+        "HINT_keyboardinter": "힌트 : 필요하면 프로그램을 다시 실행하세요.",
+        "HINT_excpet": "힌트 : 입력값을 확인하거나 다시 시도하세요."
     }
 }
 
