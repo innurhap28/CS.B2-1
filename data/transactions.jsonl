@@ -9,3 +9,4 @@
 {"id": "62345d17", "date": "2026-07-08", "type": "expense", "category": "health", "amount": 4300, "memo": "medicine for cold", "tags": ["medicine", "pharmacy"]}
 {"id": "00eddc21", "date": "2026-07-11", "type": "expense", "category": "food", "amount": 13900, "memo": "ramen in hongdae", "tags": ["ramen", "lunch"]}
 {"id": "c1389758", "date": "2026-07-11", "type": "expense", "category": "transport", "amount": 30000, "memo": "taxi heading to home", "tags": ["taxi"]}
+{"id": "fa1a8001", "date": "2026-07-23", "type": "expense", "category": "food", "amount": 36000, "memo": "lunch", "tags": ["lunch"]}

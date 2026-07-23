@@ -11,7 +11,7 @@ class FileManager:
 
         self.transactions_file = self.data_dir / "transactions.jsonl"
         self.categories_file = self.data_dir / "categories.jsonl"
-        self.budgets_file = self.data_dir / "budgets.jsonl"
+        self.budgets_file = self.data_dir / "budgets.json"
 
     def ensure_files(self) -> None:                 # data 파일이 없을 경우 생성
         self.data_dir.mkdir(exist_ok=True)
@@ -36,7 +36,9 @@ class FileManager:
             for line in file:
                 yield json.loads(line)
 
-    def reverse_stream_jsonl(path):                 # 역방향 제너레이터 기반 스트리밍 처리
+    def reverse_stream_jsonl(self):                 # 역방향 제너레이터 기반 스트리밍 처리
+        path = self.transactions_file
+
         with open(path, "rb") as f:
             f.seek(0,2)
             pos = f.tell()
